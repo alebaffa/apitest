@@ -9,12 +9,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRoutes(t *testing.T) {
+func TestSystemInfo(t *testing.T) {
 	w := httptest.NewRecorder()
-	req, err := http.NewRequest("GET", "localhost:8080", nil)
+	req, err := http.NewRequest("GET", "", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	GetUserBasicInfo(w, req)
+	Router().ServeHTTP(w, req)
 	assert.Equal(t, "ciao", w.Body.String(), "they should be equal")
+}
+
+func TestGetUserInfo(t *testing.T) {
+	w := httptest.NewRecorder()
+	req, err := http.NewRequest("GET", "/user/123", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	Router().ServeHTTP(w, req)
+	assert.Equal(t, "User 123", w.Body.String(), "they should be equal")
 }
