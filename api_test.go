@@ -15,6 +15,6 @@ func TestRoutes(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	getUserBasicInfo(w, req)
+	GetUserBasicInfo(w, req)
 	assert.Equal(t, "ciao", w.Body.String(), "they should be equal")
 }
